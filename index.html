@@ -64,12 +64,45 @@
             opacity: 0.9;
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            background: var(--bg-light);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            position: sticky;
+            top: 60px;
+            z-index: 40;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
         /* Main Content */
         .content {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
             padding-bottom: 100px;
+        }
+
+        .content.hidden {
+            display: none;
         }
 
         /* Budget Card */
@@ -137,6 +170,24 @@
             justify-content: space-between;
             font-size: 13px;
             color: var(--text-muted);
+        }
+
+        .budget-breakdown {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .breakdown-label {
+            color: var(--success);
         }
 
         /* Stats Grid */
@@ -307,6 +358,79 @@
             margin-bottom: 12px;
         }
 
+        /* History List */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .history-item {
+            background: var(--bg-light);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .history-item:active {
+            transform: scale(0.98);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .history-month {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .history-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .history-stat {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .history-stat-label {
+            color: var(--text-muted);
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .history-stat-value {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .history-detail {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .history-detail.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: var(--bg-light);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -445,7 +569,7 @@
             flex: 1;
         }
 
-        /* Bottom Action Button */
+        /* FAB Buttons */
         .fab {
             position: fixed;
             bottom: 20px;
@@ -468,6 +592,12 @@
 
         .fab:active {
             transform: scale(0.9);
+        }
+
+        .fab-add-money {
+            bottom: 90px;
+            background: linear-gradient(135deg, var(--success), #34d399);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
         }
 
         /* Setup Screen */
@@ -545,32 +675,6 @@
             transform: scale(0.98);
         }
 
-        /* Category Colors */
-        .category-food { --color: #f97316; }
-        .category-entertainment { --color: #ec4899; }
-        .category-shopping { --color: #8b5cf6; }
-        .category-gaming { --color: #06b6d4; }
-        .category-sports { --color: #10b981; }
-        .category-other { --color: #6366f1; }
-
-        .category-food { border-color: rgba(249, 115, 22, 0.3); }
-        .category-food.active { background: #f97316; }
-
-        .category-entertainment { border-color: rgba(236, 72, 153, 0.3); }
-        .category-entertainment.active { background: #ec4899; }
-
-        .category-shopping { border-color: rgba(139, 92, 246, 0.3); }
-        .category-shopping.active { background: #8b5cf6; }
-
-        .category-gaming { border-color: rgba(6, 182, 212, 0.3); }
-        .category-gaming.active { background: #06b6d4; }
-
-        .category-sports { border-color: rgba(16, 185, 129, 0.3); }
-        .category-sports.active { background: #10b981; }
-
-        .category-other { border-color: rgba(99, 102, 241, 0.3); }
-        .category-other.active { background: #6366f1; }
-
         /* Responsive */
         @media (max-height: 600px) {
             .header {
@@ -603,6 +707,32 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(99, 102, 241, 0.5);
         }
+
+        /* Category Colors */
+        .category-food { --color: #f97316; }
+        .category-entertainment { --color: #ec4899; }
+        .category-shopping { --color: #8b5cf6; }
+        .category-gaming { --color: #06b6d4; }
+        .category-sports { --color: #10b981; }
+        .category-other { --color: #6366f1; }
+
+        .category-food { border-color: rgba(249, 115, 22, 0.3); }
+        .category-food.active { background: #f97316; }
+
+        .category-entertainment { border-color: rgba(236, 72, 153, 0.3); }
+        .category-entertainment.active { background: #ec4899; }
+
+        .category-shopping { border-color: rgba(139, 92, 246, 0.3); }
+        .category-shopping.active { background: #8b5cf6; }
+
+        .category-gaming { border-color: rgba(6, 182, 212, 0.3); }
+        .category-gaming.active { background: #06b6d4; }
+
+        .category-sports { border-color: rgba(16, 185, 129, 0.3); }
+        .category-sports.active { background: #10b981; }
+
+        .category-other { border-color: rgba(99, 102, 241, 0.3); }
+        .category-other.active { background: #6366f1; }
     </style>
 </head>
 <body>
@@ -633,8 +763,14 @@
                 <div class="header-subtitle" id="headerSubtitle">Track your spending</div>
             </div>
 
-            <!-- Content -->
-            <div class="content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('current')">Current Month</button>
+                <button class="tab" onclick="switchTab('history')">History</button>
+            </div>
+
+            <!-- Current Month Tab -->
+            <div class="content" id="currentContent">
                 <!-- Budget Card -->
                 <div class="budget-card">
                     <div class="budget-label">Remaining Budget</div>
@@ -646,6 +782,7 @@
                         <span id="budgetSpent">Spent: $0.00</span>
                         <span id="budgetTotal">Total: $0.00</span>
                     </div>
+                    <div class="budget-breakdown" id="budgetBreakdown"></div>
                 </div>
 
                 <!-- Stats -->
@@ -673,79 +810,157 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Add Transaction Modal -->
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Add Expense</h2>
-                    <button class="close-btn" onclick="closeModal()">×</button>
+            <!-- History Tab -->
+            <div class="content hidden" id="historyContent">
+                <button class="back-btn" onclick="switchTab('current')" style="display: none;">← Back to Current</button>
+                <div class="section-title">📚 Monthly History</div>
+                <div class="history-list" id="historyList">
+                    <div class="empty-state">
+                        <div class="empty-emoji">📅</div>
+                        <p>No past months yet. Start tracking!</p>
+                    </div>
                 </div>
-
-                <!-- Category Selection -->
-                <div>
-                    <div class="section-title">Category</div>
-                    <div class="categories" id="categoriesContainer"></div>
-                </div>
-
-                <!-- Form -->
-                <form onsubmit="handleAddTransaction(event)">
-                    <div class="form-group">
-                        <label class="form-label">Amount</label>
-                        <input 
-                            type="number" 
-                            class="form-input" 
-                            id="amount" 
-                            placeholder="0.00" 
-                            step="0.01"
-                            min="0"
-                            required
-                            inputmode="decimal"
-                        >
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Date</label>
-                            <input 
-                                type="date" 
-                                class="form-input" 
-                                id="date" 
-                                required
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Store/Place</label>
-                            <input 
-                                type="text" 
-                                class="form-input" 
-                                id="store" 
-                                placeholder="e.g., Target"
-                            >
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">What did you buy?</label>
-                        <input 
-                            type="text" 
-                            class="form-input" 
-                            id="description" 
-                            placeholder="e.g., New shoes"
-                        >
-                    </div>
-
-                    <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">Add Expense</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                    </div>
-                </form>
             </div>
         </div>
 
-        <!-- FAB Button -->
-        <button class="fab" onclick="openModal()">+</button>
+        <!-- FAB Buttons -->
+        <button class="fab fab-add-money" id="addMoneyFab" style="display: none;" onclick="openAddMoneyModal()">💰</button>
+        <button class="fab" id="addExpenseFab" style="display: none;" onclick="openModal()">+</button>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Expense</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+
+            <!-- Category Selection -->
+            <div>
+                <div class="section-title">Category</div>
+                <div class="categories" id="categoriesContainer"></div>
+            </div>
+
+            <!-- Form -->
+            <form onsubmit="handleAddTransaction(event)">
+                <div class="form-group">
+                    <label class="form-label">Amount</label>
+                    <input 
+                        type="number" 
+                        class="form-input" 
+                        id="amount" 
+                        placeholder="0.00" 
+                        step="0.01"
+                        min="0"
+                        required
+                        inputmode="decimal"
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input 
+                            type="date" 
+                            class="form-input" 
+                            id="date" 
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Store/Place</label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="store" 
+                            placeholder="e.g., Target"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What did you buy?</label>
+                    <input 
+                        type="text" 
+                        class="form-input" 
+                        id="description" 
+                        placeholder="e.g., New shoes"
+                    >
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Add Expense</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Money Modal -->
+    <div class="modal" id="addMoneyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Money</h2>
+                <button class="close-btn" onclick="closeAddMoneyModal()">×</button>
+            </div>
+
+            <form onsubmit="handleAddMoney(event)">
+                <div class="form-group">
+                    <label class="form-label">Amount</label>
+                    <input 
+                        type="number" 
+                        class="form-input" 
+                        id="addMoneyAmount" 
+                        placeholder="0.00" 
+                        step="0.01"
+                        min="0"
+                        required
+                        inputmode="decimal"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Source</label>
+                    <select class="form-select" id="moneySource" required>
+                        <option value="">Select source...</option>
+                        <option value="Chores">Chores</option>
+                        <option value="Allowance">Allowance</option>
+                        <option value="Birthday Gift">Birthday Gift</option>
+                        <option value="Holiday Gift">Holiday Gift</option>
+                        <option value="Refund">Refund</option>
+                        <option value="Part-time Job">Part-time Job</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input 
+                        type="date" 
+                        class="form-input" 
+                        id="addMoneyDate" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes (optional)</label>
+                    <input 
+                        type="text" 
+                        class="form-input" 
+                        id="addMoneyNotes" 
+                        placeholder="e.g., Mowed the lawn"
+                    >
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Add Money</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAddMoneyModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -760,42 +975,94 @@
         ];
 
         // State
-        let budget = 0;
-        let transactions = [];
+        let months = {}; // { 'YYYY-MM': { budget, baseBudget, transactions, createdDate } }
+        let currentMonth = '';
         let selectedCategory = 'food';
 
         // Init
         loadData();
         setupCategories();
-        setDateToToday();
+        checkMonthRollover();
+        
+        if (Object.keys(months).length > 0) {
+            showMainApp();
+            render();
+        }
+
+        // Event Listeners
+        document.getElementById('addExpenseFab').addEventListener('click', openModal);
+        document.getElementById('addMoneyFab').addEventListener('click', openAddMoneyModal);
 
         // Functions
+        function getMonthKey(date = new Date()) {
+            return date.toISOString().slice(0, 7); // YYYY-MM format
+        }
+
         function loadData() {
             try {
                 const saved = localStorage.getItem('moneyTrackerData');
                 if (saved) {
-                    const data = JSON.parse(saved);
-                    budget = data.budget;
-                    transactions = data.transactions || [];
+                    months = JSON.parse(saved);
+                    currentMonth = getMonthKey();
                     
-                    if (budget > 0) {
-                        showMainApp();
+                    // Create current month if it doesn't exist
+                    if (!months[currentMonth]) {
+                        months[currentMonth] = {
+                            budget: 0,
+                            baseBudget: 0,
+                            transactions: [],
+                            createdDate: new Date().toISOString()
+                        };
                     }
                 }
             } catch (e) {
                 console.error('Error loading data:', e);
+                months = {};
+                currentMonth = getMonthKey();
             }
         }
 
         function saveData() {
             try {
-                localStorage.setItem('moneyTrackerData', JSON.stringify({
-                    budget,
-                    transactions
-                }));
+                localStorage.setItem('moneyTrackerData', JSON.stringify(months));
                 render();
             } catch (e) {
                 console.error('Error saving data:', e);
+            }
+        }
+
+        function checkMonthRollover() {
+            currentMonth = getMonthKey();
+            
+            if (!months[currentMonth]) {
+                // Get previous month for carryover
+                const prevDate = new Date();
+                prevDate.setMonth(prevDate.getMonth() - 1);
+                const prevMonth = getMonthKey(prevDate);
+                
+                let newBudget = 0;
+                let baseBudget = 0;
+                let carryover = 0;
+                
+                if (months[prevMonth]) {
+                    baseBudget = months[prevMonth].baseBudget;
+                    const prevData = months[prevMonth];
+                    const prevSpent = prevData.transactions
+                        .filter(t => !t.isIncome)
+                        .reduce((sum, t) => sum + t.amount, 0);
+                    carryover = Math.max(0, prevData.budget - prevSpent);
+                    newBudget = baseBudget + carryover;
+                }
+                
+                months[currentMonth] = {
+                    budget: newBudget,
+                    baseBudget: baseBudget,
+                    transactions: [],
+                    carryover: carryover,
+                    createdDate: new Date().toISOString()
+                };
+                
+                saveData();
             }
         }
 
@@ -808,7 +1075,14 @@
                 return;
             }
 
-            budget = amount;
+            currentMonth = getMonthKey();
+            months[currentMonth] = {
+                budget: amount,
+                baseBudget: amount,
+                transactions: [],
+                createdDate: new Date().toISOString()
+            };
+            
             saveData();
             showMainApp();
         }
@@ -816,7 +1090,20 @@
         function showMainApp() {
             document.getElementById('setupScreen').classList.remove('active');
             document.getElementById('mainApp').style.display = 'flex';
-            render();
+            document.getElementById('addExpenseFab').style.display = 'flex';
+            document.getElementById('addMoneyFab').style.display = 'flex';
+        }
+
+        function switchTab(tab) {
+            document.getElementById('currentContent').classList.toggle('hidden', tab !== 'current');
+            document.getElementById('historyContent').classList.toggle('hidden', tab !== 'history');
+            
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'history') {
+                renderHistory();
+            }
         }
 
         function setupCategories() {
@@ -840,14 +1127,11 @@
             selectedCategory = id;
         }
 
-        function setDateToToday() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('date').value = today;
-        }
-
         function openModal() {
             document.getElementById('modal').classList.add('active');
             document.getElementById('amount').focus();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
         }
 
         function closeModal() {
@@ -855,7 +1139,6 @@
             document.getElementById('amount').value = '';
             document.getElementById('store').value = '';
             document.getElementById('description').value = '';
-            setDateToToday();
             selectCategory('food', document.querySelector('.category-food'));
         }
 
@@ -872,7 +1155,7 @@
                 return;
             }
 
-            transactions.push({
+            months[currentMonth].transactions.push({
                 id: Date.now(),
                 amount,
                 date,
@@ -882,38 +1165,97 @@
                 timestamp: new Date().toISOString()
             });
 
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            months[currentMonth].transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
             saveData();
             closeModal();
         }
 
-        function deleteTransaction(id) {
-            if (confirm('Delete this transaction?')) {
-                transactions = transactions.filter(t => t.id !== id);
-                saveData();
+        function openAddMoneyModal() {
+            document.getElementById('addMoneyModal').classList.add('active');
+            document.getElementById('addMoneyAmount').focus();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('addMoneyDate').value = today;
+        }
+
+        function closeAddMoneyModal() {
+            document.getElementById('addMoneyModal').classList.remove('active');
+            document.getElementById('addMoneyAmount').value = '';
+            document.getElementById('moneySource').value = '';
+            document.getElementById('addMoneyNotes').value = '';
+        }
+
+        function handleAddMoney(e) {
+            e.preventDefault();
+
+            const amount = parseFloat(document.getElementById('addMoneyAmount').value);
+            const source = document.getElementById('moneySource').value;
+            const date = document.getElementById('addMoneyDate').value;
+            const notes = document.getElementById('addMoneyNotes').value;
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
             }
+
+            months[currentMonth].budget += amount;
+            months[currentMonth].transactions.push({
+                id: Date.now(),
+                amount: -amount,
+                date,
+                store: source,
+                description: notes,
+                category: 'income',
+                timestamp: new Date().toISOString(),
+                isIncome: true
+            });
+
+            months[currentMonth].transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            saveData();
+            closeAddMoneyModal();
+        }
+
+        function deleteTransaction(id) {
+            months[currentMonth].transactions = months[currentMonth].transactions.filter(t => t.id !== id);
+            saveData();
         }
 
         function clearAllTransactions() {
             if (confirm('Clear all transactions? This cannot be undone.')) {
-                transactions = [];
+                months[currentMonth].transactions = [];
                 saveData();
             }
         }
 
         function render() {
+            const monthData = months[currentMonth];
+            if (!monthData) return;
+
             // Calculate totals
-            const totalSpent = transactions.reduce((sum, t) => sum + t.amount, 0);
-            const remaining = budget - totalSpent;
-            const percentage = (totalSpent / budget) * 100;
+            const totalSpent = monthData.transactions
+                .filter(t => !t.isIncome)
+                .reduce((sum, t) => sum + t.amount, 0);
+            const remaining = monthData.budget - totalSpent;
+            const percentage = (totalSpent / monthData.budget) * 100;
+
+            // Get current month name
+            const date = new Date(currentMonth + '-01');
+            const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
             // Update header
-            document.getElementById('headerSubtitle').textContent = `$${remaining.toFixed(2)} left`;
+            document.getElementById('headerSubtitle').textContent = `${monthName} • $${remaining.toFixed(2)} left`;
 
             // Update budget card
             document.getElementById('budgetRemaining').textContent = `$${Math.max(0, remaining).toFixed(2)}`;
             document.getElementById('budgetSpent').textContent = `Spent: $${totalSpent.toFixed(2)}`;
-            document.getElementById('budgetTotal').textContent = `Total: $${budget.toFixed(2)}`;
+            document.getElementById('budgetTotal').textContent = `Total: $${monthData.budget.toFixed(2)}`;
+
+            // Budget breakdown
+            let breakdown = '';
+            if (monthData.carryover > 0) {
+                breakdown = `<div class="breakdown-item"><span class="breakdown-label">+ Carryover from last month:</span> <span>$${monthData.carryover.toFixed(2)}</span></div>`;
+                breakdown += `<div class="breakdown-item"><span>Base budget:</span> <span>$${monthData.baseBudget.toFixed(2)}</span></div>`;
+            }
+            document.getElementById('budgetBreakdown').innerHTML = breakdown;
 
             const progress = document.getElementById('budgetProgress');
             progress.style.width = Math.min(percentage, 100) + '%';
@@ -925,11 +1267,11 @@
 
             // Update stats
             document.getElementById('totalSpent').textContent = `$${totalSpent.toFixed(2)}`;
-            document.getElementById('transactionCount').textContent = transactions.length;
+            document.getElementById('transactionCount').textContent = monthData.transactions.length;
 
             // Render transactions
             const list = document.getElementById('transactionsList');
-            if (transactions.length === 0) {
+            if (monthData.transactions.length === 0) {
                 list.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-emoji">📊</div>
@@ -937,11 +1279,123 @@
                     </div>
                 `;
             } else {
-                list.innerHTML = transactions.map(t => {
-                    const category = CATEGORIES.find(c => c.id === t.category);
+                list.innerHTML = monthData.transactions.map(t => {
                     const dateObj = new Date(t.date);
                     const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                     
+                    if (t.isIncome) {
+                        return `
+                            <div class="transaction-item" style="opacity: 0.9;">
+                                <div class="transaction-left">
+                                    <div class="transaction-category">💵 ${t.store}</div>
+                                    <div class="transaction-details">
+                                        <span>${dateStr}</span>
+                                        ${t.description ? `<span>•</span><span>${t.description}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="transaction-amount" style="color: var(--success);">+$${Math.abs(t.amount).toFixed(2)}</div>
+                                    <button class="delete-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const category = CATEGORIES.find(c => c.id === t.category);
+                        return `
+                            <div class="transaction-item">
+                                <div class="transaction-left">
+                                    <div class="transaction-category">${category.emoji} ${category.name}</div>
+                                    <div class="transaction-details">
+                                        <span>${dateStr}</span>
+                                        ${t.store ? `<span>•</span><span>${t.store}</span>` : ''}
+                                        ${t.description ? `<span>•</span><span>${t.description}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="transaction-amount">-$${t.amount.toFixed(2)}</div>
+                                    <button class="delete-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }).join('');
+            }
+        }
+
+        function renderHistory() {
+            const sortedMonths = Object.keys(months).sort().reverse();
+            const list = document.getElementById('historyList');
+
+            if (sortedMonths.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-emoji">📅</div>
+                        <p>No past months yet. Start tracking!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = sortedMonths.map(monthKey => {
+                const monthData = months[monthKey];
+                const date = new Date(monthKey + '-01');
+                const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                
+                const totalSpent = monthData.transactions
+                    .filter(t => !t.isIncome)
+                    .reduce((sum, t) => sum + t.amount, 0);
+                const remaining = monthData.budget - totalSpent;
+
+                return `
+                    <div class="history-item" onclick="toggleHistoryDetail('${monthKey}')">
+                        <div class="history-month">${monthName}</div>
+                        <div class="history-stats">
+                            <div class="history-stat">
+                                <div class="history-stat-label">Budget</div>
+                                <div class="history-stat-value">$${monthData.budget.toFixed(2)}</div>
+                            </div>
+                            <div class="history-stat">
+                                <div class="history-stat-label">Spent</div>
+                                <div class="history-stat-value">$${totalSpent.toFixed(2)}</div>
+                            </div>
+                            <div class="history-stat">
+                                <div class="history-stat-label">Remaining</div>
+                                <div class="history-stat-value">$${Math.max(0, remaining).toFixed(2)}</div>
+                            </div>
+                        </div>
+                        <div class="history-detail" id="detail-${monthKey}">
+                            <div class="section-title">📋 Transactions</div>
+                            ${renderHistoryTransactions(monthData)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderHistoryTransactions(monthData) {
+            if (monthData.transactions.length === 0) {
+                return '<p style="text-align: center; color: var(--text-muted); padding: 20px;">No transactions</p>';
+            }
+
+            return monthData.transactions.map(t => {
+                const dateObj = new Date(t.date);
+                const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                
+                if (t.isIncome) {
+                    return `
+                        <div class="transaction-item" style="opacity: 0.9;">
+                            <div class="transaction-left">
+                                <div class="transaction-category">💵 ${t.store}</div>
+                                <div class="transaction-details">
+                                    <span>${dateStr}</span>
+                                    ${t.description ? `<span>•</span><span>${t.description}</span>` : ''}
+                                </div>
+                            </div>
+                            <div class="transaction-amount" style="color: var(--success);">+$${Math.abs(t.amount).toFixed(2)}</div>
+                        </div>
+                    `;
+                } else {
+                    const category = CATEGORIES.find(c => c.id === t.category);
                     return `
                         <div class="transaction-item">
                             <div class="transaction-left">
@@ -952,24 +1406,17 @@
                                     ${t.description ? `<span>•</span><span>${t.description}</span>` : ''}
                                 </div>
                             </div>
-                            <div>
-                                <div class="transaction-amount">-$${t.amount.toFixed(2)}</div>
-                                <button class="delete-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
-                            </div>
+                            <div class="transaction-amount">-$${t.amount.toFixed(2)}</div>
                         </div>
                     `;
-                }).join('');
-            }
+                }
+            }).join('');
         }
 
-        // Settings button (optional - to change budget)
-        window.changeBudget = function() {
-            const newBudget = prompt('Enter new monthly budget:', budget);
-            if (newBudget && parseFloat(newBudget) > 0) {
-                budget = parseFloat(newBudget);
-                saveData();
-            }
-        };
+        function toggleHistoryDetail(monthKey) {
+            const detail = document.getElementById(`detail-${monthKey}`);
+            detail.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
