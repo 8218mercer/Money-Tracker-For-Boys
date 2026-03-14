@@ -1238,8 +1238,8 @@
             const percentage = (totalSpent / monthData.budget) * 100;
 
             // Get current month name
-            const date = new Date(currentMonth + '-01');
-            const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            const date = new Date();
+            const monthName = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
             // Update header
             document.getElementById('headerSubtitle').textContent = `${monthName} • $${remaining.toFixed(2)} left`;
